@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Auditing.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class AuditingController : Controller
     {
         private readonly IMongoRepository<Person> _peopleRepository;
@@ -19,16 +19,21 @@ namespace Auditing.Api.Controllers
             _peopleRepository = peopleRepository;
         }
 
-        [HttpPost("registerPerson")]
-        public async Task AddPerson(string firstName, string lastName)
+        [HttpPost]
+        public async Task Post(Person person)
         {
-            var person = new Person()
-            {
-                FirstName = "John",
-                LastName = "Doe"
-            };
-
             await _peopleRepository.InsertOneAsync(person);
         }
+
+        [HttpGet]
+        public IEnumerable<Person> Get(string firstName)
+        {
+            var people = _peopleRepository.FilterBy(
+                filter => filter.FirstName == firstName
+            );
+
+            return people;
+        }
+
     }
 }
