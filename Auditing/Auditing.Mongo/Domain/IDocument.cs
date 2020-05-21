@@ -10,6 +10,6 @@ namespace Auditing.Mongo.Domain
         [BsonRepresentation(BsonType.String)]
         ObjectId Id { get; set; }
 
-        DateTime CreatedAt { get; }
+        //DateTime CreatedAt { get; }
     }
 }

@@ -7,6 +7,6 @@ namespace Auditing.Mongo.Domain
     {
         public ObjectId Id { get; set; }
 
-        public DateTime CreatedAt => Id.CreationTime;
+        //public DateTime CreatedAt => Id.CreationTime;
     }
 }
