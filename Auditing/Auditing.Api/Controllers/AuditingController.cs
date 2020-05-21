@@ -12,27 +12,37 @@ namespace Auditing.Api.Controllers
     [Route("api/[controller]")]
     public class AuditingController : Controller
     {
-        private readonly IMongoRepository<Person> _peopleRepository;
+        private readonly IMongoRepository<AuditLog> _mongoRepository;
 
-        public AuditingController(IMongoRepository<Person> peopleRepository)
+        public AuditingController(IMongoRepository<AuditLog> mongoRepository)
         {
-            _peopleRepository = peopleRepository;
+            _mongoRepository = mongoRepository;
         }
 
         [HttpPost]
-        public async Task Post(Person person)
+        public async Task Post(AuditLog auditLog)
         {
-            await _peopleRepository.InsertOneAsync(person);
+            await _peopleRepository.InsertAsync(auditLog);
         }
 
-        [HttpGet]
-        public IEnumerable<Person> Get(string firstName)
+        [HttpGet("{userId}")]
+        public IEnumerable<AuditLog> Get(string userId)
         {
-            var people = _peopleRepository.FilterBy(
-                filter => filter.FirstName == firstName
+            var logs = _peopleRepository.FilterBy(
+                filter => filter.UserId == userId
             );
 
-            return people;
+            return logs;
+        }
+
+        [HttpGet("application/{applicationName}")]
+        public IEnumerable<AuditLog> GetByApplication(string applicationName)
+        {
+            var logs = _peopleRepository.FilterBy(
+                filter => filter.Application == applicationName
+            );
+
+            return logs;
         }
 
     }

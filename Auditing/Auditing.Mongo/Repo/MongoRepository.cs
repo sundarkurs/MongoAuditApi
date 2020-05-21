@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Auditing.Mongo.Repo
@@ -26,9 +25,8 @@ namespace Auditing.Mongo.Repo
 
         private protected string GetCollectionName(Type documentType)
         {
-            return ((BsonCollectionAttribute)documentType.GetCustomAttributes(
-                    typeof(BsonCollectionAttribute),
-                    true)
+            return ((BsonCollectionAttribute)documentType
+                .GetCustomAttributes(typeof(BsonCollectionAttribute), true)
                 .FirstOrDefault())?.CollectionName;
         }
 
@@ -60,12 +58,12 @@ namespace Auditing.Mongo.Repo
             });
         }
 
-        public virtual void InsertOne(TDocument document)
+        public virtual void Insert(TDocument document)
         {
             _collection.InsertOne(document);
         }
 
-        public virtual Task InsertOneAsync(TDocument document)
+        public virtual Task InsertAsync(TDocument document)
         {
             return Task.Run(() => _collection.InsertOneAsync(document));
         }

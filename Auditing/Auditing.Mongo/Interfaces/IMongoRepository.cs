@@ -17,9 +17,9 @@ namespace Auditing.Mongo.Interfaces
 
         Task<TDocument> FindByIdAsync(string id);
 
-        void InsertOne(TDocument document);
+        void Insert(TDocument document);
 
-        Task InsertOneAsync(TDocument document);
+        Task InsertAsync(TDocument document);
 
         void DeleteById(string id);
 
