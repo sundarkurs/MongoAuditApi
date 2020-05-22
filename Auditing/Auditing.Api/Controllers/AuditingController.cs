@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Auditing.Mongo.Interfaces;
-using Auditing.Mongo.Models;
+using Auditing.Repo;
+using Auditing.Repo.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Auditing.Api.Controllers
@@ -12,9 +10,9 @@ namespace Auditing.Api.Controllers
     [Route("api/[controller]")]
     public class AuditingController : Controller
     {
-        private readonly IMongoRepository<AuditLog> _auditRepository;
+        private readonly IAuditRepository _auditRepository;
 
-        public AuditingController(IMongoRepository<AuditLog> auditRepository)
+        public AuditingController(IAuditRepository auditRepository)
         {
             _auditRepository = auditRepository;
         }

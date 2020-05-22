@@ -1,11 +1,11 @@
-﻿using Auditing.Mongo.Domain;
+﻿using Auditing.Core.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Auditing.Mongo.Interfaces
+namespace Auditing.Core
 {
     public interface IMongoRepository<TDocument> where TDocument : IDocument
     {

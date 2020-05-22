@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Auditing.Mongo\Auditing.Mongo.csproj" />
+    <ProjectReference Include="..\Auditing.Repo\Auditing.Repo.csproj" />
   </ItemGroup>
 
 

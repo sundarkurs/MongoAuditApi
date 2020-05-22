@@ -1,5 +1,5 @@
-﻿using Auditing.Mongo.Domain;
-using Auditing.Mongo.Interfaces;
+﻿using Auditing.Core.Attributes;
+using Auditing.Core.Domain;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
@@ -8,18 +8,19 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Auditing.Mongo.Repo
+namespace Auditing.Core
 {
-    public class MongoRepository<TDocument> : IMongoRepository<TDocument>
+    public class MongoRepository<TDocument, TContext> : IMongoRepository<TDocument>
         where TDocument : IDocument
+        where TContext : MongoSettings
     {
         private readonly IMongoCollection<TDocument> _collection;
 
-        public MongoRepository()
+        public MongoRepository(MongoSettings mongoSettings)
         {
-            string databaseName = "Audit";
+            var database = new MongoClient(mongoSettings.ConnectionString)
+                .GetDatabase(mongoSettings.Database);
 
-            var database = new MongoClient().GetDatabase(databaseName);
             _collection = database.GetCollection<TDocument>(GetCollectionName(typeof(TDocument)));
         }
 

@@ -1,7 +1,8 @@
-﻿using Auditing.Mongo.Domain;
+﻿using Auditing.Core.Attributes;
+using Auditing.Core.Domain;
 using System;
 
-namespace Auditing.Mongo.Models
+namespace Auditing.Repo.Models
 {
     [BsonCollection("audit_log")]
     public class AuditLog : Document
@@ -12,7 +13,7 @@ namespace Auditing.Mongo.Models
 
         public string UserId { get; set; }
         public string Username { get; set; }
-        
+
         public string Page { get; set; }
         public string Component { get; set; }
 

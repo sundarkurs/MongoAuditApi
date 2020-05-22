@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Auditing.Mongo.Domain
+namespace Auditing.Core.Attributes
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     public class BsonCollectionAttribute : Attribute
